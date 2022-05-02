@@ -44,6 +44,7 @@ function eventoInput(e) {
     console.log("nuevo valor time: " + time);
     palabraIngresada = e.target.value = "";
     console.log(addToDom())
+    console.log(updateScore())
   }
 }
 
