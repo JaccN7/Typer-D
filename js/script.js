@@ -26,6 +26,8 @@ var score = 0;
 var palabraIngresada;
 palabraIngresada = document.querySelector('input');
 palabraIngresada.addEventListener('input', eventoInput);
+var timeInterval = setInterval(actualizarTiempo, 1000); // cada segundo se ejecuta actualizar tiempo
+var segundos = document.getElementById("timeSpan");
 
 function randomWords() {
   palabraAleatoria = words[Math.floor(Math.random() * words.length)];
@@ -49,3 +51,16 @@ function addToDom() {
 }
 
 console.log(addToDom())
+
+function actualizarTiempo(){
+  
+  if (time <= -1){
+    console.log("Perdiste");
+    segundos.textContent = "Perdiste"
+    clearInterval(timeInterval);
+    endGame();
+  }else {
+    segundos.textContent = time;
+    time = time - 1;
+  }
+}
