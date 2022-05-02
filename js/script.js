@@ -28,6 +28,7 @@ palabraIngresada = document.querySelector('input');
 palabraIngresada.addEventListener('input', eventoInput);
 var timeInterval = setInterval(actualizarTiempo, 1000); // cada segundo se ejecuta actualizar tiempo
 var segundos = document.getElementById("timeSpan");
+var endGameContainer = document.getElementById("end-game-container");
 
 function randomWords() {
   palabraAleatoria = words[Math.floor(Math.random() * words.length)];
@@ -58,7 +59,7 @@ function actualizarTiempo(){
     console.log("Perdiste");
     segundos.textContent = "Perdiste"
     clearInterval(timeInterval);
-    endGame();
+    gameOver();
   }else {
     segundos.textContent = time;
     time = time - 1;
@@ -69,4 +70,20 @@ function updateScore() {
   score += 1;
   console.log(score);
   document.getElementById('score').textContent = score;
+}
+
+function gameOver(){
+  var titulo = document.createElement ("h1"); //recibe el nombre del tag
+  titulo.textContent = "Se acabó el tiempo";
+  var parrafo = document.createElement ("p");
+  parrafo.textContent = score.textContent //obtener el valor de texto de un tag
+  endGameContainer.appendChild(titulo);
+  endGameContainer.appendChild(parrafo);
+  var boton = document.createElement("button");
+  boton.textContent = "Volver a empezar";
+  endGameContainer.appendChild(boton);
+  boton.addEventListener("click", ()=>{ //declarar función anónima
+  location.reload();
+  })
+  console.log(boton)
 }
