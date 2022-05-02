@@ -64,3 +64,9 @@ function actualizarTiempo(){
     time = time - 1;
   }
 }
+
+function updateScore() {
+  score += 1;
+  console.log(score);
+  document.getElementById('score').textContent = score;
+}
