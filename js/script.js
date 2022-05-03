@@ -37,54 +37,51 @@ function randomWords() {
 
 function eventoInput(e) {
   palabraIngresada = e.target.value;
-  console.log(palabraIngresada);
+  console.log("Palabra Ingresada: " + palabraIngresada);
+  console.log("Cuenta regresiva: " + time);
+  //console.log(e)
   if (palabraIngresada == palabraAleatoria) {
     console.log("Atinaste");
     time += 3;
-    console.log("nuevo valor time: " + time);
+    console.log("Nuevo valor time: " + time);
     palabraIngresada = e.target.value = "";
-    console.log(addToDom())
-    console.log(updateScore())
+    console.log(addToDom());
+    updateScore();
   }
 }
 
 function addToDom() {
   palabraAleatoria = document.getElementById('randomWord').textContent = randomWords();
+  return palabraAleatoria;
 }
 
-console.log(addToDom())
+console.log(addToDom());
 
-function actualizarTiempo(){
-  
-  if (time <= -1){
+function actualizarTiempo() {
+
+  if (time < 0) {
     console.log("Perdiste");
-    segundos.textContent = "Perdiste"
+    segundos.textContent = "Perdiste";
     clearInterval(timeInterval);
     gameOver();
-  }else {
+  } else {
     segundos.textContent = time;
-    time = time - 1;
+    time -= 1;
   }
 }
 
 function updateScore() {
   score += 1;
-  console.log(score);
+  console.log("Puntaje: " + score);
   document.getElementById('score').textContent = score;
+  return score;
 }
 
-function gameOver(){
-  var titulo = document.createElement ("h1"); //recibe el nombre del tag
-  titulo.textContent = "Se acabó el tiempo";
-  var parrafo = document.createElement ("p");
-  parrafo.textContent = score.textContent //obtener el valor de texto de un tag
-  endGameContainer.appendChild(titulo);
-  endGameContainer.appendChild(parrafo);
-  var boton = document.createElement("button");
-  boton.textContent = "Volver a empezar";
-  endGameContainer.appendChild(boton);
-  boton.addEventListener("click", ()=>{ //declarar función anónima
-  location.reload();
+function gameOver() {
+  endGameContainer.innerHTML = ('<h1>Se acabo el tiempo!</h1><p id="parrafo">Has obtenido ' + score + ' aciertos</p><button type="button" id="volverJugar">Volver a Jugar</button>');
+  var volverJugar = document.getElementById('volverJugar');
+  volverJugar.addEventListener("click", () => { //declarar función anónima
+    location.reload();
   })
-  console.log(boton)
+  document.getElementById('main').innerHTML = '';
 }
